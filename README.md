@@ -6,7 +6,7 @@ Application is a demo for single point entry based authentication and authorizat
 
 Request ->Zuul(gateway Service) ---routes to--> microservices(customer-rest) 
 
-Since our gateway service is a single point entry for all requests for different services, It is a good place to do any kind of filtering, currently filter for authentication is set up here, It can be improved easily to support role based authorization  
+Since our gateway service is a single point entry for all requests for different services, It is a good place to do any kind of filtering, currently filter for authentication and authorization  
 
 There are two kinds of tokens used in web 
 1)Session token (state is saved at server side, server knows who got the token) 
