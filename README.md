@@ -34,7 +34,7 @@ Run discovery server , it will occupy 8585 port, run gateway (8587 port), run cu
 1)try visiting with get request at http://localhost:8587/customers 
 You are not allowed message will be given because request doesn’t have desired token
 
-1)create customer with POST request from postman at  http://localhost:8587/register (This url is exempted, token not required for it)
+create customer with POST request from postman at  http://localhost:8587/register (This url is exempted, token not required for it)
 BODY Below
 {
 	"name" : "scooby"  ,
