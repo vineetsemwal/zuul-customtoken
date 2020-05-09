@@ -1,10 +1,10 @@
-The example demonstrate the single entry design pattern with zuul service
+# The example demonstrate the single entry design pattern with zuul service
 
 
 Application is a demo for single point entry based authentication and authorization
 
 
-Request ->Zuul(gateway Service) ---routes to--> microservices(customer-rest , product-rest) 
+Request ->Zuul(gateway Service) ---routes to--> microservices(customer-rest) 
 
 Since our gateway service is a single point entry for all requests for different services, It is a good place to do any kind of filtering, currently filter for authentication is set up here, It can be improved easily to support role based authorization  
 
