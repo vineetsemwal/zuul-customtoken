@@ -26,8 +26,8 @@ Gateway handles both authentication and authorization currently three kind of ur
 3)urls not starting with /admin/ or /public/ (token required for authentication )
 
 ### Two roles are there
-1)admin : can access every thing
-2)user: can access 
+1)admin : can access every urls
+2)user: can access non admin urls
 
 Run discovery server , it will occupy 8585 port, run gateway (8587 port), run customers app (8586 port)
 
