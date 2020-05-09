@@ -39,8 +39,14 @@ public class TokenFilter extends ZuulFilter {
         RequestContext context = RequestContext.getCurrentContext();
         try {
             HttpServletRequest request = context.getRequest();
-            String token = request.getHeader("token");
             String uri = request.getRequestURI();
+            //
+            // uri starts with public , no token required
+            //
+             if (uri.startsWith("/public/")){
+                 return null;
+             }
+            String token = request.getHeader("token");
             Log.info("request uri=" + uri);
             if (token != null && !token.isEmpty()) {
                 DecodedToken decodedToken = TokenUtil.decode(token);
@@ -64,7 +70,7 @@ public class TokenFilter extends ZuulFilter {
                             //
                             //if not admin, then user should only be able to visit urls not starting with /admin urls
                             //
-                            if (!uri.startsWith("/admin")) {
+                            if (!uri.startsWith("/admin/")) {
                                 return null;
                             }
                         }
