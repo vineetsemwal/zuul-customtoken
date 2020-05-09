@@ -1,4 +1,4 @@
-# The example demonstrate the single entry design pattern with zuul service
+# The example demonstrate the single entry design pattern using zuul service
 
 
 Application is a demo for single point entry based authentication and authorization
