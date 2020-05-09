@@ -20,14 +20,16 @@ applications(services) are currently setup with hsql database
 
 Gateway handles both authentication and authorization currently three kind of urls are supported(spring security or any other security framework is not used)
 
-Currently Three kinds of url are supported
+### Currently Three kinds of url are supported
 1)urls starting with /public/ (no authentication required)
 2)urls starting with /admin/  (token required for authentication + authorization for admin role)
 3)urls not starting with /admin/ or /public/ (token required for authentication )
 
-Two roles are there
+### Two roles are there
 1)admin : can access every thing
 2)user: can access 
+
+Run discovery server , it will occupy 8585 port, run gateway (8587 port), run customers app (8586 port)
 
 1)try visiting with get request at http://localhost:8587/customers 
 You are not allowed message will be given because request doesn’t have desired token
