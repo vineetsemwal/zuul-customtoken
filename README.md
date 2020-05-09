@@ -8,9 +8,9 @@ Request ->Zuul(gateway Service) ---routes to--> microservices(customer-rest)
 
 Since our gateway service is a single point entry for all requests for different services, It is a good place to do any kind of filtering, currently filter for authentication and authorization  
 
-There are two kinds of tokens used in web 
-1)Session token (state is saved at server side, server knows who got the token) 
-2)Stateless token (server doesn’t know which client is this token given to so the token should contain complete information to identify user ) 
+There are two kinds of tokens used in web    
+1)Session token (state is saved at server side, server knows who got the token)   
+2)Stateless token (server doesn’t know which client is this token given to so the token should contain complete information to identify user )   
 
 In the current example we are creating simple text based stateless token, it can be encrypted for security if there is a need, TokenUtil class contains code for generating and decoding our token, If there is a need jwt generation and decoding can happen here by using any jwt library  
 
@@ -21,13 +21,13 @@ applications(services) are currently setup with hsql database
 Gateway handles both authentication and authorization currently three kind of urls are supported(spring security or any other security framework is not used)
 
 ### Currently Three kinds of url are supported
-1)urls starting with /public/ (no authentication required)
-2)urls starting with /admin/  (token required for authentication + authorization for admin role)
-3)urls not starting with /admin/ or /public/ (token required for authentication )
+1)urls starting with /public/ (no authentication required)  
+2)urls starting with /admin/  (token required for authentication + authorization for admin role)  
+3)urls not starting with /admin/ or /public/ (token required for authentication )  
 
 ### Two roles are there
-1)admin : can access every urls
-2)user: can access non admin urls
+1)admin : can access every urls   
+2)user: can access non admin urls  
 
 Run discovery server , it will occupy 8585 port, run gateway (8587 port), run customers app (8586 port)
 
