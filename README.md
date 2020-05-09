@@ -1,7 +1,7 @@
 The example demonstrate the single entry design pattern with zuul service
 
 
-Application is a demo for single point entry based authentication
+Application is a demo for single point entry based authentication and authorization
 
 
 Request ->Zuul(gateway Service) ---routes to--> microservices(customer-rest , product-rest) 
