@@ -31,7 +31,7 @@ Gateway handles both authentication and authorization currently three kind of ur
 
 Run discovery server , it will occupy 8585 port, run gateway (8587 port), run customers app (8586 port)
 
-1)try visiting with get request at http://localhost:8587/customers 
+1)try visiting with get request at http://localhost:8587/admin/customers 
 You are not allowed message will be given because request doesn’t have desired token
 
 create customer with POST request from postman at  http://localhost:8587/register (This url is exempted, token not required for it)
