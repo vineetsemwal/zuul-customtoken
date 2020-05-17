@@ -63,12 +63,4 @@ public class GateController {
     }
 
 
-    @ExceptionHandler(IncorrectCredentialsException.class)
-    public ResponseEntity<String> handleIncorrectCredentials(IncorrectCredentialsException exception) {
-        String msg = exception.getMessage();
-        ResponseEntity<String> response = new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
-        return response;
-    }
-
-
 }
