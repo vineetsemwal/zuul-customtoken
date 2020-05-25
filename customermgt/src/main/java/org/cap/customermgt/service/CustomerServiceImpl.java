@@ -27,34 +27,40 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Customer findById(int id) {
         Optional<Customer> optional = customerDao.findById(id);
-         if(optional.isPresent()){
-             return optional.get();
-         }
-         throw new CustomerNotFoundException("customer not found for id="+id);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        throw new CustomerNotFoundException("customer not found for id=" + id);
+    }
+
+    @Override
+    public Customer findByUsername(String username) {
+        Customer customer = customerDao.findByUsername(username);
+        return customer;
     }
 
     @Override
     public List<Customer> fetchAll() {
-        List<Customer>customers=customerDao.findAll();
+        List<Customer> customers = customerDao.findAll();
         return customers;
     }
 
     @Override
     public Customer save(Customer customer) {
-        customer=customerDao.save(customer);
+        customer = customerDao.save(customer);
         return customer;
     }
 
     @Override
-    public boolean credentialsCorrect(int id, String password){
-        if(password==null|| password.isEmpty()){
+    public boolean credentialsCorrect(int id, String password) {
+        if (password == null || password.isEmpty()) {
             return false;
         }
-        Customer customer=findById(id);
-        if(customer==null){
+        Customer customer = findById(id);
+        if (customer == null) {
             return false;
         }
-        boolean passwordEquals=customer.getPassword().equals(password);
+        boolean passwordEquals = customer.getPassword().equals(password);
         return passwordEquals;
     }
 

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ICustomerDao extends JpaRepository<Customer,Integer> {
 
-
+    Customer findByUsername(String username) ;
 }

@@ -1,12 +1,10 @@
 package com.cg.gateway.util;
 
-import java.util.Set;
-
-public class CustomerDto {
+public class CustomerDetails {
 
     private int id;
 
-    private String name;
+    private String username;
 
     public int getId() {
         return id;
@@ -16,12 +14,12 @@ public class CustomerDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     private String password;
@@ -32,6 +30,16 @@ public class CustomerDto {
 
     public void setPassword(String password){
         this.password=password;
+    }
+
+    private String role;
+
+    public String getRole(){
+        return role;
+    }
+
+    public void setRole(String role){
+        this.role=role;
     }
 
 }

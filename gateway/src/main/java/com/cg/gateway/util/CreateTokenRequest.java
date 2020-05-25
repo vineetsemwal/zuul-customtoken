@@ -1,7 +1,12 @@
 package com.cg.gateway.util;
 
-public class DecodedToken {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+public class CreateTokenRequest {
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 
     public String getUsername() {
@@ -20,13 +25,4 @@ public class DecodedToken {
         this.password = password;
     }
 
-    private String role;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

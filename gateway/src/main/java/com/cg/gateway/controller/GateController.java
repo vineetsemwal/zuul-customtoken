@@ -4,7 +4,6 @@ import com.cg.gateway.entities.UserCredential;
 import com.cg.gateway.exceptions.IncorrectCredentialsException;
 import com.cg.gateway.service.CredentialService;
 import com.cg.gateway.util.*;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,32 +31,29 @@ public class GateController {
     private CredentialService service;
 
     @PostMapping("/register")
-    public ResponseEntity<CustomerDto> register(@RequestBody @Valid  CreateCustomerRequestData requestData) {
+    public ResponseEntity<CustomerDetails> register(@RequestBody @Valid CreateCustomerRequest requestData) {
         String url = customerServiceBaseUrl + "/add";
-        CustomerDto createCustomer = restTemplate.postForObject(url, requestData, CustomerDto.class);
+        CustomerDetails createCustomer = restTemplate.postForObject(url, requestData, CustomerDetails.class);
         UserCredential credential = new UserCredential();
-        String id = String.valueOf(createCustomer.getId());
-        credential.setId(id);
         credential.setPassword(createCustomer.getPassword());
         credential.setRole(requestData.getRole());
-        Log.info("inside register,id=" + createCustomer.getId() +
-                " password=" + createCustomer.getPassword() +" role="+credential.getRole());
+        credential.setUsername(createCustomer.getUsername());
         service.save(credential);
-        ResponseEntity<CustomerDto> response = new ResponseEntity<>(createCustomer, HttpStatus.OK);
+        ResponseEntity<CustomerDetails> response = new ResponseEntity<>(createCustomer, HttpStatus.OK);
         return response;
     }
 
     @PostMapping("/createtoken")
-    public ResponseEntity<String> createToken(@RequestBody CredentialDto credentialData) {
-        String id = credentialData.getId();
-        String password = credentialData.getPassword();
-        boolean correct = service.checkCredentials(id, password);
+    public ResponseEntity<String> createToken(@RequestBody @Valid CreateTokenRequest requestData) {
+        String username = requestData.getUsername();
+        String password = requestData.getPassword();
+        boolean correct = service.checkCredentials(username, password);
         if (!correct) {
             throw new IncorrectCredentialsException("incorrect credentials");
         }
-        UserCredential credential =service.findById(id);
+        UserCredential credential =service.findByUsername(username);
         String role=credential.getRole();
-        String token = TokenUtil.generateToken(id, password,role);
+        String token = TokenUtil.generateToken(username, password,role);
         ResponseEntity<String> response = new ResponseEntity<>(token, HttpStatus.OK);
         return response;
     }

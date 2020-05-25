@@ -33,20 +33,20 @@ public class CredentialServiceImpl implements CredentialService {
 
 
     @Override
-    public boolean checkCredentials(String id, String password) {
-        if(id==null || id.isEmpty() || password==null || password.isEmpty()){
+    public boolean checkCredentials(String username, String password) {
+        if(username==null || username.isEmpty() || password==null || password.isEmpty()){
             return false;
         }
-        UserCredential user = findById(id);
+        UserCredential user = findByUsername(username);
         if (user == null) {
             return false;
         }
-        return user.getId().equals(id) && user.getPassword().equals(password);
+        return user.getUsername().equals(username) && user.getPassword().equals(password);
     }
 
     @Override
-    public UserCredential findById(String id) {
-        Optional<UserCredential> optional = dao.findById(id);
+    public UserCredential findByUsername(String username) {
+        Optional<UserCredential> optional = dao.findById(username);
         if (optional.isPresent()) {
             return optional.get();
         }
@@ -54,8 +54,8 @@ public class CredentialServiceImpl implements CredentialService {
     }
 
     @Override
-    public boolean isAdmin(String id) {
-       UserCredential userCredential= findById(id);
+    public boolean isAdmin(String username) {
+       UserCredential userCredential= findByUsername(username);
        return "admin".equalsIgnoreCase(userCredential.getRole());
     }
 }

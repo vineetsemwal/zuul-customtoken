@@ -7,6 +7,8 @@ import java.util.List;
 public interface ICustomerService {
     Customer findById(int id);
 
+    Customer findByUsername(String username);
+
     List<Customer> fetchAll();
 
     Customer save(Customer customer);

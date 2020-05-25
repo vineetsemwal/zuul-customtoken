@@ -51,15 +51,15 @@ public class TokenFilter extends ZuulFilter {
             if (token != null && !token.isEmpty()) {
                 DecodedToken decodedToken = TokenUtil.decode(token);
                 if (decodedToken != null) {
-                    String id = decodedToken.getId();
+                    String username = decodedToken.getUsername();
                     String password = decodedToken.getPassword();
-                    boolean correct = credentialService.checkCredentials(id, password);
-                    boolean isAdmin = credentialService.isAdmin(id);
+                    boolean correct = credentialService.checkCredentials(username, password);
+                    boolean isAdmin = credentialService.isAdmin(username);
                     if (correct) {
                         //
                         //request sender added as header as information which can be used later in routed service
                         //
-                        context.addZuulRequestHeader("requestsender", id);
+                        context.addZuulRequestHeader("requestsender", username);
                         //
                         //if is admin then can access anything, no further check needed
                         //

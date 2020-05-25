@@ -4,12 +4,12 @@ import com.cg.gateway.entities.UserCredential;
 
 public interface CredentialService {
 
-    boolean checkCredentials(String id, String password);
+    boolean checkCredentials(String username, String password);
 
-    UserCredential findById(String id);
+    UserCredential findByUsername(String username);
 
     UserCredential save(UserCredential user);
 
-    boolean isAdmin(String id);
+    boolean isAdmin(String username);
 
 }

@@ -1,20 +1,22 @@
 package com.cg.gateway.util;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class CreateCustomerRequestData {
-    @Size(min = 1)
-    private String name;
+public class CreateCustomerRequest {
+    @NotBlank
+    private String username;
 
-    @Size(min = 1)
+    @Size(min = 6)
     private String password;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -25,7 +27,7 @@ public class CreateCustomerRequestData {
         this.password = password;
     }
 
-    @Size(min = 1)
+    @Pattern(regexp = "user|admin")
     private String role;
 
     public String getRole() {
