@@ -1,4 +1,4 @@
-package com.cg.gateway.util;
+package com.cg.gateway.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

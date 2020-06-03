@@ -1,4 +1,4 @@
-package com.cg.gateway.util;
+package com.cg.gateway.dto;
 
 public class CustomerDetails {
 

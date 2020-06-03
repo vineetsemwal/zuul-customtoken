@@ -1,5 +1,8 @@
 package com.cg.gateway.controller;
 
+import com.cg.gateway.dto.CreateCustomerRequest;
+import com.cg.gateway.dto.CreateTokenRequest;
+import com.cg.gateway.dto.CustomerDetails;
 import com.cg.gateway.entities.UserCredential;
 import com.cg.gateway.exceptions.IncorrectCredentialsException;
 import com.cg.gateway.service.CredentialService;

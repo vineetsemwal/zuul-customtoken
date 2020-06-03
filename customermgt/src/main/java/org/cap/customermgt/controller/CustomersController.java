@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 @RestController
 @RequestMapping("/customers")
 public class CustomersController {
@@ -23,12 +24,11 @@ public class CustomersController {
 
 
     /**
-     * final url will be /customers/find/{id}
      *
      * Case when only user can fetch his information, not of any other user
      * Admin can fetch information of other users too
      */
-    @GetMapping("/get/{id}")
+    @GetMapping("/getbyid/{id}")
     public ResponseEntity<Customer> findById(@PathVariable("id") int id, HttpServletRequest request) {
         String requestSenderUsername= request.getHeader("requestsender");
         Customer requestSender=service.findByUsername(requestSenderUsername);
@@ -41,9 +41,26 @@ public class CustomersController {
     }
 
 
+    /**
+     *
+     * Case when only user can fetch his information, not of any other user
+     * Admin can fetch information of other users too
+     */
+    @GetMapping("/getbyusername/{username}")
+    public ResponseEntity<Customer> findByUsername( @PathVariable("username") String username, HttpServletRequest request) {
+        String requestSenderUsername= request.getHeader("requestsender");
+        Customer requestSender=service.findByUsername(requestSenderUsername);
+        if(requestSenderUsername.equals(username) || "admin".equals(requestSender.getRole()))  {
+            Customer desiredUser=service.findByUsername(username);
+            ResponseEntity<Customer> response = new ResponseEntity<>(desiredUser, HttpStatus.OK);
+            return response;
+        }
+        throw new UnAuthorizedException("you are not authorized");
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<Customer> addCustomer(@RequestBody AddCustomerRequestData dto) {
-        Customer customer = convert(dto);
+    public ResponseEntity<Customer> addCustomer(@RequestBody AddCustomerRequestData requestData) {
+        Customer customer = convert(requestData);
         customer=service.save(customer);
         ResponseEntity<Customer> response = new ResponseEntity<>(customer, HttpStatus.OK);
         return response;
